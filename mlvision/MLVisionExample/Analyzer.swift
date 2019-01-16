@@ -19,9 +19,7 @@ class Analyzer{
     var cpallText: String = String.init()
     var sevenelevenText: String = String.init()
     var branchText: String = String.init()
-    var productAmountText: String = String.init()
-    var productText: String = String.init()
-    var productFavorText: String = String.init()
+    var productList = Array<Product>()
     var receiptIDText: String = String.init()
     
     public func analyze(text: String) -> Void{
@@ -39,9 +37,7 @@ class Analyzer{
         cpallText = String.init()
         sevenelevenText = String.init()
         branchText = String.init()
-        productText = String.init()
-        productFavorText = String.init()
-        productAmountText  = String.init()
+        productList.removeAll()
         receiptIDText = String.init()
     }
     
@@ -79,17 +75,11 @@ class Analyzer{
         let RULES = [PRODUCT_NAME, "เสิร์ดโดะ", "เสิร์ดโตะ", "เสิร์ดโคะ", "เสิร์คโดะ", "เสิร์คโตะ", "เสิร์คโคะ", "เสิร์ตโดะ", "เสิร์ตโตะ", "เสิร์ตโคะ", "เสิร์ทโดะ", "เสิร์ทโตะ", "เสิร์ทโคะ", "เสร็ตโตะ"]
         
         if isContain(text: productText, rules: RULES){
-            if self.productText == ""{
-                self.productText = PRODUCT_NAME
-            }
-            
-            if self.productAmountText == ""{
-                self.productAmountText = String(words[0])
-            }
-            
-            if self.productFavorText == ""{
-                self.productFavorText = getFavorName(text: (String(words[2])))
-            }
+            let name = PRODUCT_NAME
+            let favor = getFavorName(text: text)
+            let amount = String(words[0])
+            let product = Product(name: name,favor: favor,amount: amount)
+            productList.append(product)
         }
     }
     
@@ -169,9 +159,13 @@ class Analyzer{
         print("Haru CPALL : " + cpallText)
         print("Haru 7-Eleven : " + sevenelevenText)
         print("Haru Branch : " + branchText)
-        print("Haru Product Amount : " + productAmountText)
-        print("Haru Product : " + productText)
-        print("Haru Favor : " + productFavorText)
+        
+        productList.forEach{
+            print("Haru Product Name : " + $0.name)
+            print("Haru Product Favor : " + $0.favor)
+            print("Haru Product Amount : " + $0.amount)
+        }
+        
         print("Haru ReceiptID : " + receiptIDText)
     }
 }

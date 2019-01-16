@@ -32,6 +32,7 @@
 		10E1152920F3E09C0013E4A4 /* image_has_text.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7202DC6520D0C1A300034C35 /* image_has_text.jpg */; };
 		10E1152A20F3E09F0013E4A4 /* qr_code.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7202DC6420D0C1A300034C35 /* qr_code.jpg */; };
 		10E1156520F4681E0013E4A4 /* shared in Resources */ = {isa = PBXBuildFile; fileRef = 1001E70020CF132C00445CB3 /* shared */; };
+		49E7A4F121EFA94B007AA409 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E7A4F021EFA94B007AA409 /* Product.swift */; };
 		7202DC6920D0C1A300034C35 /* qr_code.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7202DC6420D0C1A300034C35 /* qr_code.jpg */; };
 		7202DC6A20D0C1A300034C35 /* image_has_text.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7202DC6520D0C1A300034C35 /* image_has_text.jpg */; };
 		7202DC6B20D0C1A300034C35 /* barcode_128.png in Resources */ = {isa = PBXBuildFile; fileRef = 7202DC6620D0C1A300034C35 /* barcode_128.png */; };
@@ -90,6 +91,7 @@
 		10E1151820EBF7E10013E4A4 /* UIImage+VisionDetection.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIImage+VisionDetection.h"; sourceTree = "<group>"; };
 		10E1151920EBF7E10013E4A4 /* UIImage+VisionDetection.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIImage+VisionDetection.m"; sourceTree = "<group>"; };
 		26888D2FFD50BDF3E2D3AC14 /* Pods-MLVisionExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLVisionExample.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MLVisionExample/Pods-MLVisionExample.debug.xcconfig"; sourceTree = "<group>"; };
+		49E7A4F021EFA94B007AA409 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		7202DC6420D0C1A300034C35 /* qr_code.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = qr_code.jpg; path = Resources/qr_code.jpg; sourceTree = "<group>"; };
 		7202DC6520D0C1A300034C35 /* image_has_text.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = image_has_text.jpg; path = Resources/image_has_text.jpg; sourceTree = "<group>"; };
 		7202DC6620D0C1A300034C35 /* barcode_128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = barcode_128.png; path = Resources/barcode_128.png; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				BB287B4A2072A0200069707A /* Supporting Files */,
 				BB287B4420729CE90069707A /* Info.plist */,
 				DD660BC321EF223600E836E0 /* Analyzer.swift */,
+				49E7A4F021EFA94B007AA409 /* Product.swift */,
 			);
 			path = MLVisionExample;
 			sourceTree = "<group>";
@@ -615,6 +618,7 @@
 				BB287B3920729CE90069707A /* AppDelegate.swift in Sources */,
 				10224B5E2087E49F00A77316 /* MLKitExtensions.swift in Sources */,
 				1001E6F720CEE0DD00445CB3 /* UIUtilities.swift in Sources */,
+				49E7A4F121EFA94B007AA409 /* Product.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
