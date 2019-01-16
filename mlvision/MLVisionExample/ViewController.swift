@@ -45,11 +45,8 @@ class ViewController:  UIViewController, UINavigationControllerDelegate {
   var currentImage = 0
 
   // MARK: - IBOutlets
-
-  @IBOutlet fileprivate weak var detectorPicker: UIPickerView!
   @IBOutlet fileprivate weak var imageView: UIImageView!
   @IBOutlet fileprivate weak var photoCameraButton: UIBarButtonItem!
-  @IBOutlet fileprivate weak var videoCameraButton: UIBarButtonItem!
   @IBOutlet weak var detectButton: UIBarButtonItem!
 
   // MARK: - UIViewController
@@ -69,17 +66,10 @@ class ViewController:  UIViewController, UINavigationControllerDelegate {
     imagePicker.delegate = self
     imagePicker.sourceType = .photoLibrary
 
-    detectorPicker.delegate = self
-    detectorPicker.dataSource = self
-
     if !UIImagePickerController.isCameraDeviceAvailable(.front) &&
       !UIImagePickerController.isCameraDeviceAvailable(.rear) {
       photoCameraButton.isEnabled = false
-      videoCameraButton.isEnabled = false
     }
-
-    let defaultRow = (DetectorPickerRow.rowsCount / 2) - 1
-    detectorPicker.selectRow(defaultRow, inComponent: 0, animated: false)
   }
 
   override func viewWillAppear(_ animated: Bool) {
@@ -98,29 +88,7 @@ class ViewController:  UIViewController, UINavigationControllerDelegate {
 
   @IBAction func detect(_ sender: Any) {
     clearResults()
-    let row = detectorPicker.selectedRow(inComponent: 0)
-    if let rowIndex = DetectorPickerRow(rawValue: row) {
-      switch rowIndex {
-      case .detectFaceOnDevice:
-        detectFaces(image: imageView.image)
-      case .detectTextOnDevice:
-        detectTextOnDevice(image: imageView.image)
-      case .detectBarcodeOnDevice:
-        detectBarcodes(image: imageView.image)
-      case .detectImageLabelsOnDevice:
-        detectLabels(image: imageView.image)
-      case .detectTextInCloud:
-        detectTextInCloud(image: imageView.image)
-      case .detectDocumentTextInCloud:
-        detectDocumentTextInCloud(image: imageView.image)
-      case .detectImageLabelsInCloud:
-        detectCloudLabels(image: imageView.image)
-      case .detectLandmarkInCloud:
-        detectCloudLandmarks(image: imageView.image)
-      }
-    } else {
-      print("No such item at row \(row) in detector picker.")
-    }
+    detectTextInCloud(image: imageView.image)
   }
 
   @IBAction func openPhotoLibrary(_ sender: Any) {
