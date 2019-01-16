@@ -41,6 +41,7 @@
 		BB287B3E20729CE90069707A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BB287B3C20729CE90069707A /* Main.storyboard */; };
 		DB6C4856C80D3D0C608E0D98 /* Pods_MLVisionExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B008DFB54882BA4273DA688E /* Pods_MLVisionExample.framework */; };
 		DD660BC221EF1CBE00E836E0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD660BC121EF1CBE00E836E0 /* GoogleService-Info.plist */; };
+		DD660BC421EF223600E836E0 /* Analyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD660BC321EF223600E836E0 /* Analyzer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +103,7 @@
 		BB287B3D20729CE90069707A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BB287B4420729CE90069707A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD660BC121EF1CBE00E836E0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DD660BC321EF223600E836E0 /* Analyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analyzer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -245,6 +247,7 @@
 				1001E6F820CF021E00445CB3 /* CameraViewController.swift */,
 				BB287B4A2072A0200069707A /* Supporting Files */,
 				BB287B4420729CE90069707A /* Info.plist */,
+				DD660BC321EF223600E836E0 /* Analyzer.swift */,
 			);
 			path = MLVisionExample;
 			sourceTree = "<group>";
@@ -607,6 +610,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				10224B582087E43100A77316 /* ViewController.swift in Sources */,
+				DD660BC421EF223600E836E0 /* Analyzer.swift in Sources */,
 				1001E6F920CF021E00445CB3 /* CameraViewController.swift in Sources */,
 				BB287B3920729CE90069707A /* AppDelegate.swift in Sources */,
 				10224B5E2087E49F00A77316 /* MLKitExtensions.swift in Sources */,

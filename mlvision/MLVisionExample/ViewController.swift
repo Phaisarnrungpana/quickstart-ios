@@ -22,6 +22,9 @@ import Firebase
 /// Main view controller class.
 @objc(ViewController)
 class ViewController:  UIViewController, UINavigationControllerDelegate {
+    
+    let analyzer = Analyzer()
+    
     /// Firebase vision instance.
     // [START init_vision]
     lazy var vision = Vision.vision()
@@ -124,6 +127,7 @@ class ViewController:  UIViewController, UINavigationControllerDelegate {
     /// Clears the results text view and removes any frames that are visible.
     private func clearResults() {
         removeDetectionAnnotations()
+        analyzer.clearData()
         self.resultsText = ""
     }
     
@@ -136,22 +140,22 @@ class ViewController:  UIViewController, UINavigationControllerDelegate {
         )
         
         resultsAlertController.addAction(
-            UIAlertAction(title: "AR Scanner", style: .destructive) { _ in
+            UIAlertAction(title: "AR Scanner", style: .default) { _ in
                 resultsAlertController.dismiss(animated: true, completion: nil)
             }
         )
         
         resultsAlertController.addAction(
-            UIAlertAction(title: "Cancel", style: .destructive){_ in
+            UIAlertAction(title: "Cancel", style: .cancel){_ in
                 resultsAlertController.dismiss(animated: true, completion: nil)
             }
         )
-        
+
         resultsAlertController.message = resultsText
         resultsAlertController.popoverPresentationController?.barButtonItem = detectButton
         resultsAlertController.popoverPresentationController?.sourceView = self.view
         present(resultsAlertController, animated: true, completion: nil)
-        print(resultsText)
+//        print(resultsText)
     }
     
     /// Updates the image view with a scaled version of the given image.
@@ -483,6 +487,7 @@ class ViewController:  UIViewController, UINavigationControllerDelegate {
                 self.showResults()
                 return
             }
+            
             // Blocks.
             for block in text.blocks {
                 let transformedRect = block.frame.applying(self.transformMatrix())
@@ -501,6 +506,8 @@ class ViewController:  UIViewController, UINavigationControllerDelegate {
                         color: UIColor.orange
                     )
                     
+                    self.analyzer.analyze(text: line.text)
+                    
                     // Elements.
                     for element in line.elements {
                         let transformedRect = element.frame.applying(self.transformMatrix())
@@ -516,6 +523,7 @@ class ViewController:  UIViewController, UINavigationControllerDelegate {
                     }
                 }
             }
+            
             self.resultsText += "\(text.text)\n"
             self.showResults()
         }
