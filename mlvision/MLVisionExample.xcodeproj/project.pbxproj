@@ -44,6 +44,7 @@
 		DD660BC221EF1CBE00E836E0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD660BC121EF1CBE00E836E0 /* GoogleService-Info.plist */; };
 		DD660BC421EF223600E836E0 /* Analyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD660BC321EF223600E836E0 /* Analyzer.swift */; };
 		DD9A5ADB21F0415F002D9436 /* Levenshtein.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9A5ADA21F0415F002D9436 /* Levenshtein.swift */; };
+		DD9A5ADD21F0A5BA002D9436 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD9A5ADC21F0A5BA002D9436 /* Images.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,7 @@
 		DD660BC121EF1CBE00E836E0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DD660BC321EF223600E836E0 /* Analyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analyzer.swift; sourceTree = "<group>"; };
 		DD9A5ADA21F0415F002D9436 /* Levenshtein.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Levenshtein.swift; sourceTree = "<group>"; };
+		DD9A5ADC21F0A5BA002D9436 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,6 +256,7 @@
 				DD660BC321EF223600E836E0 /* Analyzer.swift */,
 				49E7A4F021EFA94B007AA409 /* Product.swift */,
 				DD9A5ADA21F0415F002D9436 /* Levenshtein.swift */,
+				DD9A5ADC21F0A5BA002D9436 /* Images.xcassets */,
 			);
 			path = MLVisionExample;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 				10224B762087E5A900A77316 /* grace_hopper.jpg in Resources */,
 				7202DC6C20D0C1A300034C35 /* beach.jpg in Resources */,
 				7202DC6920D0C1A300034C35 /* qr_code.jpg in Resources */,
+				DD9A5ADD21F0A5BA002D9436 /* Images.xcassets in Resources */,
 				7202DC6B20D0C1A300034C35 /* barcode_128.png in Resources */,
 				7202DC6A20D0C1A300034C35 /* image_has_text.jpg in Resources */,
 				BB287B3E20729CE90069707A /* Main.storyboard in Resources */,
@@ -874,6 +878,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 26888D2FFD50BDF3E2D3AC14 /* Pods-MLVisionExample.debug.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6TWUB42CQR;
@@ -885,7 +890,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -893,6 +898,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B7C9FE4DFEEA184B4D69028C /* Pods-MLVisionExample.release.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 6TWUB42CQR;
@@ -904,7 +910,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

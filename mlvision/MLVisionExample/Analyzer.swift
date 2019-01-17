@@ -10,17 +10,20 @@ import Foundation
 
 class Analyzer{
     
+    private let DEFAULT_TEXT = "?"
     private let PRODUCT_NAME = "ดีเสิร์ตโตะ"
     private let GRAPE_FAVOR = "องุ่นเคียวโฮ"
     private let BERRY_FAVOR = "มิกซ์เบอร์รีโลลิป็อป"
     private let STRAWBERRY_FAVOR = "สตรอว์เบอรร์รี บิงซู"
+    private let CPALL = "CP ALL"
+    private let SEVEN_ELEVEN = "7-Eleven"
     private let SHARP = Character("#")
     
-    var cpallText: String = String.init()
-    var sevenelevenText: String = String.init()
-    var branchText: String = String.init()
+    var cpallText: String = "?"
+    var sevenelevenText: String = "?"
+    var branchText: String = "?"
     var productList = Array<Product>()
-    var receiptIDText: String = String.init()
+    var receiptIDText: String = "?"
     
     public func analyze(text: String) -> Void{
         print("Haru RawData : " + text)
@@ -36,31 +39,58 @@ class Analyzer{
     }
     
     public func clearData() -> Void{
-        cpallText = String.init()
-        sevenelevenText = String.init()
-        branchText = String.init()
+        cpallText = DEFAULT_TEXT
+        sevenelevenText = DEFAULT_TEXT
+        branchText = DEFAULT_TEXT
         productList.removeAll()
-        receiptIDText = String.init()
+        receiptIDText = DEFAULT_TEXT
+    }
+    
+    public func getConcatAnalyzedString() -> String{
+        
+        let newline = "\n"
+        let blankSpace = " "
+        
+        var analyzedString = "CPALL : " + cpallText + newline
+        analyzedString += "7-Eleven : " + sevenelevenText + newline
+        analyzedString += "Branch : " + branchText + newline
+        
+        productList.forEach({product in
+            analyzedString += "Product : "
+            analyzedString += product.name
+            analyzedString += blankSpace
+            analyzedString += product.favor
+            analyzedString += blankSpace
+            analyzedString += ",จำนวน : " + product.amount
+            analyzedString += newline
+        })
+        
+        analyzedString += newline
+        analyzedString += "ReceiptID : " + receiptIDText + newline
+        
+        return analyzedString
     }
     
     private func analyzeCPALLText(text: String) -> Void{
-        if cpallText == ""{
-            let CPALL = "CP ALL"
-            let isContain = text.contains(CPALL)
-            cpallText = isContain ? CPALL : cpallText
+        if cpallText == DEFAULT_TEXT{
+            let RULES = [CPALL, "CP", "ALL"]
+            if isContain(text: text, rules: RULES){
+                cpallText = CPALL
+            }
         }
     }
     
     private func analyzeSevenElevenText(text: String) -> Void{
-        if sevenelevenText == ""{
-            let SEVEN_ELEVEN = "7-Eleven"
-            let isContain = text.contains(SEVEN_ELEVEN)
-            sevenelevenText = isContain ? SEVEN_ELEVEN : sevenelevenText
+        if sevenelevenText == DEFAULT_TEXT{
+            let RULES = [SEVEN_ELEVEN, "7-", "Eleven", "Elever", "Elev"]
+            if isContain(text: text, rules: RULES){
+                sevenelevenText = SEVEN_ELEVEN
+            }
         }
     }
     
     private func analyzeBranchText(text: String) -> Void{
-        if self.branchText == ""{
+        if self.branchText == DEFAULT_TEXT{
             let pattern = "\\([0-9]+\\)"
             let branchText = getMatchRegexRuleText(text: text, pattern: pattern)
             self.branchText = branchText ?? self.branchText
@@ -74,7 +104,7 @@ class Analyzer{
         }
         
         let productText = String(words[1])
-        let RULES = [PRODUCT_NAME, "เสิร์ดโดะ", "เสิร์ดโตะ", "เสิร์ดโคะ", "เสิร์คโดะ", "เสิร์คโตะ", "เสิร์คโคะ", "เสิร์ตโดะ", "เสิร์ตโตะ", "เสิร์ตโคะ", "เสิร์ทโดะ", "เสิร์ทโตะ", "เสิร์ทโคะ", "เสร็ตโตะ"]
+        let RULES = [PRODUCT_NAME, "เสิร์ดโดะ", "เสิร์ดโตะ", "เสิร์ดโคะ", "เสิร์คโดะ", "เสิร์คโตะ", "เสิร์คโคะ", "เสิร์ตโดะ", "เสิร์ตโตะ", "เสิร์ตโคะ", "เสิร์ทโดะ", "เสิร์ทโตะ", "เสิร์ทโคะ", "เสร็ตโตะ", "เช็คโอะ"]
         
         if isContain(text: productText, rules: RULES){
             let name = PRODUCT_NAME
@@ -83,13 +113,16 @@ class Analyzer{
             let favor = getFavorName(text: favorText)
             
             let amountText = String(words[0])
-            let product = Product(name: name,favor: favor,amount: amountText)
+            let isNumerical = Int(amountText) != nil
+            let amount = isNumerical ? amountText : DEFAULT_TEXT
+            
+            let product = Product(name: name,favor: favor,amount: amount)
             productList.append(product)
         }
     }
     
     private func analyzeReceiptID(text: String) -> Void{
-        if self.receiptIDText == ""{
+        if self.receiptIDText == DEFAULT_TEXT{
             let pattern = "(R.[0-9]{10})|(R[0-9]{10})|(R[[:blank:]].[0-9]{10})"
             if let receiptIDText = getMatchRegexRuleText(text: text, pattern: pattern){
                 self.receiptIDText = getValidateReceiptFormat(receiptIDText: receiptIDText)
@@ -120,7 +153,8 @@ class Analyzer{
     private func getFavorName(text: String) -> String{
         if isGrapeFavor(text: text) { return GRAPE_FAVOR }
         if isMixBerryFavor(text: text) { return BERRY_FAVOR }
-        return STRAWBERRY_FAVOR
+        if isStawberryFavor(text: text){ return STRAWBERRY_FAVOR }
+        return DEFAULT_TEXT
     }
     
     private func isGrapeFavor(text: String) -> Bool{
@@ -130,6 +164,11 @@ class Analyzer{
     
     private func isMixBerryFavor(text: String) -> Bool{
         let RULES = [BERRY_FAVOR, "มิกซ์", "มิก", "มี", "มีกซ์", "มีก"]
+        return isContain(text: text, rules: RULES)
+    }
+    
+    private func isStawberryFavor(text: String) -> Bool{
+        let RULES = [STRAWBERRY_FAVOR, "สตรอ","สตรอว" , "สตรอว์"]
         return isContain(text: text, rules: RULES)
     }
     

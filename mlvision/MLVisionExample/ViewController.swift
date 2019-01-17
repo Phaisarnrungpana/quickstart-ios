@@ -146,12 +146,12 @@ class ViewController:  UIViewController, UINavigationControllerDelegate {
         )
         
         resultsAlertController.addAction(
-            UIAlertAction(title: "Cancel", style: .cancel){_ in
+            UIAlertAction(title: "Cancel", style: .destructive){_ in
                 resultsAlertController.dismiss(animated: true, completion: nil)
             }
         )
 
-        resultsAlertController.message = resultsText
+        resultsAlertController.message = analyzer.getConcatAnalyzedString()
         resultsAlertController.popoverPresentationController?.barButtonItem = detectButton
         resultsAlertController.popoverPresentationController?.sourceView = self.view
         present(resultsAlertController, animated: true, completion: nil)
