@@ -129,7 +129,7 @@ class Analyzer{
     }
     
     private func isGrapeFavor(text: String) -> Bool{
-        let RULES = [GRAPE_FAVOR, "องุ่น"]
+        let RULES = [GRAPE_FAVOR, "องุ่น", "อรุ่น"]
         return isContain(text: text, rules: RULES)
     }
     
