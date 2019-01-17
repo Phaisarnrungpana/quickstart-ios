@@ -23,6 +23,8 @@ class Analyzer{
     var receiptIDText: String = String.init()
     
     public func analyze(text: String) -> Void{
+        print("Haru RawData : " + text)
+        
         analyzeCPALLText(text: text)
         analyzeSevenElevenText(text: text)
         analyzeBranchText(text: text)
@@ -76,16 +78,19 @@ class Analyzer{
         
         if isContain(text: productText, rules: RULES){
             let name = PRODUCT_NAME
-            let favor = getFavorName(text: text)
-            let amount = String(words[0])
-            let product = Product(name: name,favor: favor,amount: amount)
+            
+            let favorText = String(words[2])
+            let favor = getFavorName(text: favorText)
+            
+            let amountText = String(words[0])
+            let product = Product(name: name,favor: favor,amount: amountText)
             productList.append(product)
         }
     }
     
     private func analyzeReceiptID(text: String) -> Void{
         if self.receiptIDText == ""{
-            let pattern = "(R\\W[0-9]{10})|(R[0-9]{10})|(R \\W[0-9]{10})"
+            let pattern = "(R.[0-9]{10})|(R[0-9]{10})|(R[[:blank:]].[0-9]{10})"
             if let receiptIDText = getMatchRegexRuleText(text: text, pattern: pattern){
                 self.receiptIDText = getValidateReceiptFormat(receiptIDText: receiptIDText)
             }
@@ -109,16 +114,6 @@ class Analyzer{
             receiptID.insert(SHARP, at: stringIndex)
         }
         
-        return receiptID
-    }
-    
-    private func getValidateSHARPFormat(receiptIDText: String) -> String{
-        var receiptID = receiptIDText
-        let isHaveShap = receiptID.contains(SHARP)
-        if !isHaveShap{
-            let index: String.Index = receiptID.firstIndex(of: Character("R"))!
-            receiptID.insert(SHARP, at: index)
-        }
         return receiptID
     }
     
@@ -147,12 +142,39 @@ class Analyzer{
         return isContain
     }
     
+    private func isSimilarity(text: String, rules: [String]) -> Bool{
+        var similarityPercentageList = [Int]()
+        for rule in rules{
+            let similarityPercentage = getSimilarityPercentage(mainText: text, checkedText: rule)
+            similarityPercentageList.append(similarityPercentage)
+        }
+        
+        let CRITERIA = 50
+        let maxPercentage = similarityPercentageList.max()
+        let isSimilarity = maxPercentage! > CRITERIA
+        return isSimilarity
+    }
+    
     private func getMatchRegexRuleText(text:String, pattern: String) -> String?{
         let regex = try! NSRegularExpression(pattern: pattern)
         let range = NSRange(location: 0, length: text.utf16.count)
         let result = regex.firstMatch(in: text, options: [], range: range)
             .map{String(text[Range($0.range,in: text)!])}
         return result
+    }
+    
+    private func getSimilarityPercentage(mainText: String, checkedText: String) -> Int{
+        let levenshteinResult = Levenshtein.levenshtein(aStr: mainText, bStr: checkedText)
+        let differentPercentage = (levenshteinResult * 100 / mainText.count)
+        let similarityPercentage = 100 - differentPercentage
+        
+        return similarityPercentage
+    }
+    
+    private func getAveragePercentage(percentageList: [Int]) -> Int{
+        let sumPercentage = percentageList.reduce(0,+)
+        let averagePercentage = sumPercentage / percentageList.count
+        return averagePercentage
     }
     
     private func printResult() -> Void{

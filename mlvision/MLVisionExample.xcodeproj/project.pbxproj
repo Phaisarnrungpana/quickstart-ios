@@ -43,6 +43,7 @@
 		DB6C4856C80D3D0C608E0D98 /* Pods_MLVisionExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B008DFB54882BA4273DA688E /* Pods_MLVisionExample.framework */; };
 		DD660BC221EF1CBE00E836E0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DD660BC121EF1CBE00E836E0 /* GoogleService-Info.plist */; };
 		DD660BC421EF223600E836E0 /* Analyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD660BC321EF223600E836E0 /* Analyzer.swift */; };
+		DD9A5ADB21F0415F002D9436 /* Levenshtein.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD9A5ADA21F0415F002D9436 /* Levenshtein.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +107,7 @@
 		BB287B4420729CE90069707A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DD660BC121EF1CBE00E836E0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DD660BC321EF223600E836E0 /* Analyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analyzer.swift; sourceTree = "<group>"; };
+		DD9A5ADA21F0415F002D9436 /* Levenshtein.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Levenshtein.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -251,6 +253,7 @@
 				BB287B4420729CE90069707A /* Info.plist */,
 				DD660BC321EF223600E836E0 /* Analyzer.swift */,
 				49E7A4F021EFA94B007AA409 /* Product.swift */,
+				DD9A5ADA21F0415F002D9436 /* Levenshtein.swift */,
 			);
 			path = MLVisionExample;
 			sourceTree = "<group>";
@@ -613,6 +616,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				10224B582087E43100A77316 /* ViewController.swift in Sources */,
+				DD9A5ADB21F0415F002D9436 /* Levenshtein.swift in Sources */,
 				DD660BC421EF223600E836E0 /* Analyzer.swift in Sources */,
 				1001E6F920CF021E00445CB3 /* CameraViewController.swift in Sources */,
 				BB287B3920729CE90069707A /* AppDelegate.swift in Sources */,
