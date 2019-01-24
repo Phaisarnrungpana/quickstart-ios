@@ -23,7 +23,7 @@ import Firebase
 @objc(ViewController)
 class ViewController:  UIViewController, UINavigationControllerDelegate {
     
-    let analyzer = Analyzer()
+    let analyzer = AnalyzerDessertto()
     
     /// Firebase vision instance.
     // [START init_vision]

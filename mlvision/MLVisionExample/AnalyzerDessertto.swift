@@ -1,5 +1,5 @@
 //
-//  Analysis.swift
+//  AnalyzerDessertto.swift
 //  MLVisionExample
 //
 //  Created by Wongsathorn Phaisarnrungpana on 16/1/2562 BE.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Analyzer{
+class AnalyzerDessertto{
     
     private let DEFAULT_TEXT = "?"
     private let PRODUCT_NAME = "ดีเสิร์ตโตะ"
