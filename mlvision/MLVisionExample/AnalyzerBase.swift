@@ -31,7 +31,7 @@ class AnalyzerBase{
     
     //MARK: - Constructor
     init() {
-        targetProductRulesList = [];
+        targetProductRulesList = ["CP", "cp", "bkp", "BKP", "ห้าดาว"];
     }
     
     //MARK: - Override Method
@@ -45,6 +45,7 @@ class AnalyzerBase{
     
     func clearData() -> Void {
         targetProductList.removeAll()
+        otherProductList.removeAll()
     }
     
     func getConcatStringResult() -> String{
@@ -80,8 +81,11 @@ class AnalyzerBase{
             if isAnalyzingProuductLine{
                 
                 let isTargetProduct = isContain(text: lineText, rules: targetProductRulesList)
-                var targetList = isTargetProduct ? targetProductList : otherProductList
-                targetList.append(lineText)
+                if isTargetProduct{
+                    targetProductList.append(lineText)
+                }else{
+                    otherProductList.append(lineText)
+                }
             }
         }
     }

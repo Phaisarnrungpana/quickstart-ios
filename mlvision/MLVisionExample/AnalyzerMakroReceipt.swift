@@ -7,3 +7,105 @@
 //
 
 import Foundation
+
+class AnalyzerMakroReceipt: AnalyzerBase{
+    
+    private let MAKRO = "บมจ.สยามแม็คโคร"
+    private let BRANCH_LINE_INDEX = 0
+    
+    var branchText = "?"
+    var posIDText = "?"
+    
+    override init() {
+        super.init()
+        analyzerRulesList = [MAKRO, "สยามแม็กโคร", "แม็ค", "โคร"]
+        stopAnalyzerProductRulesList = ["TOTAL", "TOT", "OTAL", "T0TAL", "0TAL"]
+        startProductLineIndex = 6
+    }
+    
+    override func isMatch(text: String) -> Bool {
+        let isMatch = isContain(text: text, rules: analyzerRulesList)
+        return isMatch
+    }
+    
+    override func analyze(lineText: String, currentLineIndex: Int) {
+        super.analyze(lineText: lineText, currentLineIndex: currentLineIndex)
+        analyzeBranchText(lineText: lineText, lineIndex: currentLineIndex)
+        analyzePosIDText(lineText: lineText)
+    }
+    
+    override func clearData() {
+        super.clearData()
+        
+        branchText = DEFAULT_TEXT
+        posIDText = DEFAULT_TEXT
+    }
+    
+    override func getConcatStringResult() -> String {
+        
+        var result = MAKRO + NEW_LINE
+        result += "Branch : " + branchText + NEW_LINE
+        result += "POS ID : " + posIDText + NEW_LINE
+        
+        result += "Target Product : " + NEW_LINE
+        targetProductList.forEach { (product) in
+            result += product + NEW_LINE
+        }
+        
+        result += "Other Product : " + NEW_LINE
+        otherProductList.forEach { (product) in
+            result += product + NEW_LINE
+        }
+        
+        return result
+    }
+    
+    private func analyzeBranchText(lineText: String, lineIndex: Int) -> Void{
+        
+        var branch = lineText
+        branch.removeAll(where: {$0 == "."})
+        branch.removeAll(where: {$0 == ","})
+        
+        let words = branch.split(separator: " ")
+        let isNeverAssignBranch = self.branchText == DEFAULT_TEXT
+        let isTargetLineIndex = lineIndex == BRANCH_LINE_INDEX
+        let isFoundBranch = words.count >= 2
+        
+        if isNeverAssignBranch && isTargetLineIndex && isFoundBranch{
+            branchText = ""
+            for i in 1..<words.count{
+                branchText += words[i]
+            }
+        }
+    }
+    
+    private func analyzePosIDText(lineText: String) -> Void{
+        if self.posIDText == DEFAULT_TEXT {
+            let pattern = "P.S ... \\w{15}"
+            if let posIDText = getMatchRegexRuleText(text: lineText, pattern: pattern){
+                print("Haru POSIDText : " + posIDText)
+                self.posIDText = getValidatePosIDFormat(posIDText: posIDText)
+            }
+        }
+    }
+    
+    private func getValidatePosIDFormat(posIDText: String) -> String{
+        
+        var posID = posIDText
+        posID.removeAll(where: {$0 == " "})
+        var chars = Array(posID)
+        chars[1] = Character.init("O")
+        chars[3] = Character.init("I")
+        chars[4] = Character.init("D")
+        chars[5] = SHARP
+        
+        posID = String(chars)
+        let index2ToInsert = posID.index(posID.startIndex, offsetBy: 2)
+        posID.insert(" ", at: index2ToInsert)
+        
+        let index6ToInsert = posID.index(posID.startIndex, offsetBy: 6)
+        posID.insert(" ", at: index6ToInsert)
+        
+        return posID
+    }
+}

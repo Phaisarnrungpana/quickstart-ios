@@ -11,6 +11,8 @@ import Foundation
 class AnalyzerFactory{
     
     static let analyzerList = [
+        AnalyzeLotusReceipt.init(),
+        AnalyzerMakroReceipt.init(),
         AnalyzerSevenElevenReceipt.init(),
         AnalyzerDefaultReceipt.init()
     ]

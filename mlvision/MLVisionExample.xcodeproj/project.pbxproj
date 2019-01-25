@@ -268,10 +268,10 @@
 				1001E6F820CF021E00445CB3 /* CameraViewController.swift */,
 				BB287B4A2072A0200069707A /* Supporting Files */,
 				BB287B4420729CE90069707A /* Info.plist */,
-				DD660BC321EF223600E836E0 /* AnalyzerDessertto.swift */,
 				49E7A4F021EFA94B007AA409 /* Product.swift */,
 				DD9A5ADA21F0415F002D9436 /* Levenshtein.swift */,
 				DD9A5ADC21F0A5BA002D9436 /* Images.xcassets */,
+				DD660BC321EF223600E836E0 /* AnalyzerDessertto.swift */,
 				49CF47ED21FA2314004D9C90 /* AnalyzerSevenElevenReceipt.swift */,
 				49CF47EF21FA2328004D9C90 /* AnalyzerLotusReceipt.swift */,
 				49CF47F121FA2338004D9C90 /* AnalyzerMakroReceipt.swift */,
@@ -909,7 +909,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 98A3D72HX4;
+				DEVELOPMENT_TEAM = 6TWUB42CQR;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/MLVisionExample/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -929,7 +929,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 98A3D72HX4;
+				DEVELOPMENT_TEAM = 6TWUB42CQR;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/MLVisionExample/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

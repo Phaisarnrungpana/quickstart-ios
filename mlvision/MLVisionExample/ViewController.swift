@@ -23,7 +23,7 @@ import Firebase
 @objc(ViewController)
 class ViewController:  UIViewController, UINavigationControllerDelegate {
     
-    let analyzer = AnalyzerDessertto()
+    private var analyzer: AnalyzerBase?
     
     /// Firebase vision instance.
     // [START init_vision]
@@ -127,7 +127,6 @@ class ViewController:  UIViewController, UINavigationControllerDelegate {
     /// Clears the results text view and removes any frames that are visible.
     private func clearResults() {
         removeDetectionAnnotations()
-        analyzer.clearData()
         self.resultsText = ""
     }
     
@@ -151,11 +150,10 @@ class ViewController:  UIViewController, UINavigationControllerDelegate {
             }
         )
 
-        resultsAlertController.message = analyzer.getConcatAnalyzedString()
+        resultsAlertController.message = analyzer?.getConcatStringResult() ?? "?"
         resultsAlertController.popoverPresentationController?.barButtonItem = detectButton
         resultsAlertController.popoverPresentationController?.sourceView = self.view
         present(resultsAlertController, animated: true, completion: nil)
-//        print(resultsText)
     }
     
     /// Updates the image view with a scaled version of the given image.
@@ -488,6 +486,11 @@ class ViewController:  UIViewController, UINavigationControllerDelegate {
                 return
             }
             
+            
+            let allText = text.text
+            self.analyzer = AnalyzerFactory.getAnalyzer(text: allText)
+            self.analyzer!.clearData()
+            
             // Blocks.
             for block in text.blocks {
                 let transformedRect = block.frame.applying(self.transformMatrix())
@@ -506,7 +509,8 @@ class ViewController:  UIViewController, UINavigationControllerDelegate {
                         color: UIColor.orange
                     )
                     
-                    self.analyzer.analyze(text: line.text)
+                    let lineIndex: Int = block.lines.firstIndex(of: line)!
+                    self.analyzer!.analyze(lineText: line.text, currentLineIndex: lineIndex)
                     
                     // Elements.
                     for element in line.elements {

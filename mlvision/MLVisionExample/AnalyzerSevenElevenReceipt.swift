@@ -18,9 +18,9 @@ class AnalyzerSevenElevenReceipt : AnalyzerBase{
     
     override init() {
         super.init()
-        analyzerRulesList = []
-        stopAnalyzerProductRulesList = []
-        startProductLineIndex = 0
+        analyzerRulesList = [CPALL, SEVEN_ELEVEN, "CP", "Eleven", "Elever", "Elev"]
+        stopAnalyzerProductRulesList = ["ยอด", "สุทธิ", "สด", "เงินสด", "ทอน", "เงินทอน"]
+        startProductLineIndex = 4
     }
     
     override func isMatch(text: String) -> Bool {
@@ -29,6 +29,8 @@ class AnalyzerSevenElevenReceipt : AnalyzerBase{
     }
     
     override func analyze(lineText: String, currentLineIndex: Int) {
+        super.analyze(lineText: lineText, currentLineIndex: currentLineIndex)
+        
         analyzeBranchText(lineText: lineText)
         analyzeReceiptIDText(lineText: lineText)
     }
