@@ -83,7 +83,6 @@ class AnalyzerMakroReceipt: AnalyzerBase{
         if self.posIDText == DEFAULT_TEXT {
             let pattern = "P.S ... \\w{15}"
             if let posIDText = getMatchRegexRuleText(text: lineText, pattern: pattern){
-                print("Haru POSIDText : " + posIDText)
                 self.posIDText = getValidatePosIDFormat(posIDText: posIDText)
             }
         }
