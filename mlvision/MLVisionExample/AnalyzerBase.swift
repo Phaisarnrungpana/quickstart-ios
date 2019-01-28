@@ -33,7 +33,7 @@ class AnalyzerBase{
     
     //MARK: - Constructor
     init() {
-        targetProductRulesList = ["CP", "cp", "bkp", "BKP", "ห้าดาว"];
+        targetProductRulesList = ["CP", "cp", "bkp", "BKP","ตราห้าาดาว" ,"ห้าดาว", "ท้าดาว", "ไส้กรอก", "ไสกรอก", "ไส้กรอ", "ไสกรอ", "ไส่กรอก", "ไสกรอ"];
     }
     
     //MARK: - Override Method
@@ -46,6 +46,7 @@ class AnalyzerBase{
     }
     
     func clearData() -> Void {
+        isAnalyzingProuductLine = true
         targetProductList.removeAll()
         otherProductList.removeAll()
     }

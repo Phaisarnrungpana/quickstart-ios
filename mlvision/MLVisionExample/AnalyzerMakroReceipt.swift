@@ -99,10 +99,10 @@ class AnalyzerMakroReceipt: AnalyzerBase{
         chars[5] = SHARP
         
         posID = String(chars)
-        let index2ToInsert = posID.index(posID.startIndex, offsetBy: 2)
+        let index2ToInsert = posID.index(posID.startIndex, offsetBy: 3)
         posID.insert(" ", at: index2ToInsert)
         
-        let index6ToInsert = posID.index(posID.startIndex, offsetBy: 6)
+        let index6ToInsert = posID.index(posID.startIndex, offsetBy: 7)
         posID.insert(" ", at: index6ToInsert)
         
         return posID
