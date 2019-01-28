@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class AnalyzerBase{
     
@@ -15,6 +16,7 @@ class AnalyzerBase{
     let NEW_LINE = "\n"
     let BLANK_SPACE = " "
     let SHARP = Character.init("#")
+    let COLOR = UIColor.blue
     
     //MARK: - Public Variable
     //MARK: - Assing at constructor
@@ -26,7 +28,7 @@ class AnalyzerBase{
     var otherProductList = Array<String>()
     
     //MARK: - Private Variable
-    private var targetProductRulesList = Array<String>()
+    var targetProductRulesList = Array<String>()
     private var isAnalyzingProuductLine = true
     
     //MARK: - Constructor
@@ -48,7 +50,7 @@ class AnalyzerBase{
         otherProductList.removeAll()
     }
     
-    func getConcatStringResult() -> String{
+    func getConcatStringResult() -> NSMutableAttributedString{
         fatalError("Subclasses need to implement the `isMatch()` method.")
     }
     
@@ -68,6 +70,20 @@ class AnalyzerBase{
         let result = regex.firstMatch(in: text, options: [], range: range)
             .map{String(text[Range($0.range,in: text)!])}
         return result
+    }
+    
+    func ConvertToAttributeString(hightlightText: String, normalText: String) -> NSMutableAttributedString {
+        
+        let attribute = [NSAttributedStringKey.foregroundColor : COLOR]
+        let highlightAttributeString = NSMutableAttributedString(string: hightlightText, attributes: attribute)
+        
+        let normalAttributeString = NSMutableAttributedString(string: normalText)
+        
+        let attributeString = NSMutableAttributedString()
+        attributeString.append(highlightAttributeString)
+        attributeString.append(normalAttributeString)
+        
+        return attributeString
     }
     
     //MARK: - Private Method

@@ -12,21 +12,41 @@ class AnalyzerDefaultReceipt: AnalyzerBase {
     
     public var allString: String = ""
     
+    private var hightlightText: String = ""
+    private var normalText: String = ""
+    
+    override init() {
+        super.init()
+        
+        targetProductList.append("7-Eleven")
+        targetProductList.append("แม็คโคร")
+        targetProductList.append("TESCO")
+        targetProductList.append("LOTUS")
+    }
+    
     override func isMatch(text: String) -> Bool {
         return true
     }
     
     override func analyze(lineText: String, currentLineIndex: Int) {
-        super.analyze(lineText: lineText, currentLineIndex: currentLineIndex)
         allString += lineText + NEW_LINE
+        
+        let isProduct = isContain(text: lineText, rules: targetProductRulesList)
+        if isProduct {
+            hightlightText += lineText + NEW_LINE
+        }else{
+            normalText += lineText + NEW_LINE
+        }
     }
     
     override func clearData() {
         super.clearData()
         allString = DEFAULT_TEXT
+        hightlightText = ""
+        normalText = ""
     }
     
-    override func getConcatStringResult() -> String {
-        return allString
+    override func getConcatStringResult() -> NSMutableAttributedString {
+        return ConvertToAttributeString(hightlightText: hightlightText, normalText: normalText)
     }
 }

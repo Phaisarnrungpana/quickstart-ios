@@ -41,23 +41,23 @@ class AnalyzeLotusReceipt: AnalyzerBase {
         receiptIDText = DEFAULT_TEXT
     }
     
-    override func getConcatStringResult() -> String {
+    override func getConcatStringResult() -> NSMutableAttributedString {
         
-        var result = TESTCO_LOTUS + NEW_LINE
-        result += "Branch : " + branchText + NEW_LINE
-        result += "ReceiptID : " + receiptIDText + NEW_LINE
+        var hightlightText = TESTCO_LOTUS + NEW_LINE
+        hightlightText += "Branch : " + branchText + NEW_LINE
+        hightlightText += "ReceiptID : " + receiptIDText + NEW_LINE
         
-        result += "Target Product : " + NEW_LINE
+        hightlightText += "Target Product : " + NEW_LINE
         targetProductList.forEach { (product) in
-            result += product + NEW_LINE
+            hightlightText += product + NEW_LINE
         }
         
-        result += "Other Product : " + NEW_LINE
+        var normalText = "Other Product : " + NEW_LINE
         otherProductList.forEach { (product) in
-            result += product + NEW_LINE
+            normalText += product + NEW_LINE
         }
         
-        return result
+        return ConvertToAttributeString(hightlightText: hightlightText, normalText: normalText)
     }
     
     private func analyzeBranchText(lineText: String, lineIndex: Int) -> Void{

@@ -133,24 +133,30 @@ class ViewController:  UIViewController, UINavigationControllerDelegate {
     private func showResults() {
         
         let resultsAlertController = UIAlertController(
-            title: "Detection Results",
+            title: "",
             message: nil,
             preferredStyle: .actionSheet
         )
         
         resultsAlertController.addAction(
-            UIAlertAction(title: "AR Scanner", style: .default) { _ in
+            UIAlertAction(title: "OK", style: .default) { _ in
                 resultsAlertController.dismiss(animated: true, completion: nil)
             }
         )
         
-        resultsAlertController.addAction(
-            UIAlertAction(title: "Cancel", style: .destructive){_ in
-                resultsAlertController.dismiss(animated: true, completion: nil)
-            }
-        )
-
-        resultsAlertController.message = analyzer?.getConcatStringResult() ?? "?"
+//        resultsAlertController.addAction(
+//            UIAlertAction(title: "Cancel", style: .destructive){_ in
+//                resultsAlertController.dismiss(animated: true, completion: nil)
+//            }
+//        )
+        
+        let messageFont = [kCTFontAttributeName: UIFont(name: "Avenir-Roman", size: 14.0)!]
+        let messageAttrString = NSMutableAttributedString(string: "Message Here", attributes: messageFont as [NSAttributedStringKey : Any])
+        
+        resultsAlertController.setValue(messageAttrString, forKey: "attributedMessage")
+        
+        let analyzedMessage = analyzer?.getConcatStringResult() ?? NSMutableAttributedString.init(string: "?")
+        resultsAlertController.setValue(analyzedMessage, forKey: "attributedMessage")
         resultsAlertController.popoverPresentationController?.barButtonItem = detectButton
         resultsAlertController.popoverPresentationController?.sourceView = self.view
         present(resultsAlertController, animated: true, completion: nil)

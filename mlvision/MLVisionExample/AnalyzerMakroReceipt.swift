@@ -41,23 +41,23 @@ class AnalyzerMakroReceipt: AnalyzerBase{
         posIDText = DEFAULT_TEXT
     }
     
-    override func getConcatStringResult() -> String {
+    override func getConcatStringResult() -> NSMutableAttributedString {
         
-        var result = MAKRO + NEW_LINE
-        result += "Branch : " + branchText + NEW_LINE
-        result += "POS ID : " + posIDText + NEW_LINE
+        var hightlightText = MAKRO + NEW_LINE
+        hightlightText += "Branch : " + branchText + NEW_LINE
+        hightlightText += "POS ID : " + posIDText + NEW_LINE
         
-        result += "Target Product : " + NEW_LINE
+        hightlightText += "Target Product : " + NEW_LINE
         targetProductList.forEach { (product) in
-            result += product + NEW_LINE
+            hightlightText += product + NEW_LINE
         }
         
-        result += "Other Product : " + NEW_LINE
+        var normalText = "Other Product : " + NEW_LINE
         otherProductList.forEach { (product) in
-            result += product + NEW_LINE
+            normalText += product + NEW_LINE
         }
         
-        return result
+        return ConvertToAttributeString(hightlightText: hightlightText, normalText: normalText)
     }
     
     private func analyzeBranchText(lineText: String, lineIndex: Int) -> Void{
