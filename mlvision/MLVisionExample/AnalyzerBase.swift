@@ -33,7 +33,7 @@ class AnalyzerBase{
     
     //MARK: - Constructor
     init() {
-        targetProductRulesList = ["CP", "cp", "bkp", "BKP","ตราห้าาดาว" ,"ห้าดาว", "ท้าดาว", "ไส้กรอก", "ไสกรอก", "ไส้กรอ", "ไสกรอ", "ไส่กรอก", "ไสกรอ"];
+        targetProductRulesList = ["CP", "cp", "bkp", "BKP","ตราห้าาดาว" ,"ห้าดาว", "ท้าดาว", "ไส้กรอก", "ไสกรอก", "ไส้กรอ", "ไสกรอ", "ไส่กรอก", "ไสกรอ", "คูโร", "คุโร", "คโร", "บุตะ", "บูตะ", "บตะ", "โบตะ", "โรโบตะ", "โบดะ", "โรโบดะ" , "น้ำตาว", "kurobuta", "kurobuda", "Kurobuta", "KUROBUTA"];
     }
     
     //MARK: - Override Method
@@ -42,6 +42,8 @@ class AnalyzerBase{
     }
     
     func analyze(lineText: String, currentLineIndex: Int) -> Void{
+        print("Haru currentLineIndex : " + String(currentLineIndex))
+        print("Haru lineText : " + lineText)
         analyzeProductLineText(lineText: lineText, currentLineIndex: currentLineIndex)
     }
     
@@ -96,8 +98,8 @@ class AnalyzerBase{
             isAnalyzingProuductLine = !isContain(text: lineText, rules: stopAnalyzerProductRulesList)
             
             if isAnalyzingProuductLine{
-                
                 let isTargetProduct = isContain(text: lineText, rules: targetProductRulesList)
+                
                 if isTargetProduct{
                     targetProductList.append(lineText)
                 }else{

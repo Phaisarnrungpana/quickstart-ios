@@ -20,7 +20,7 @@ class AnalyzerMakroReceipt: AnalyzerBase{
         super.init()
         analyzerRulesList = [MAKRO, "สยามแม็กโคร", "แม็ค", "โคร"]
         stopAnalyzerProductRulesList = ["TOTAL", "TOT", "OTAL", "T0TAL", "0TAL"]
-        startProductLineIndex = 6
+//        startProductLineIndex = 6
     }
     
     override func isMatch(text: String) -> Bool {
@@ -81,7 +81,9 @@ class AnalyzerMakroReceipt: AnalyzerBase{
     
     private func analyzePosIDText(lineText: String) -> Void{
         if self.posIDText == DEFAULT_TEXT {
-            let pattern = "P.S ... \\w{15}"
+            
+            print("Haru LineText : " + lineText)
+            let pattern = "(P|p).(S|s) ... \\w{15}"
             if let posIDText = getMatchRegexRuleText(text: lineText, pattern: pattern){
                 self.posIDText = getValidatePosIDFormat(posIDText: posIDText)
             }
