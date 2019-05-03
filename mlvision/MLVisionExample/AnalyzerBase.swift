@@ -33,7 +33,7 @@ class AnalyzerBase{
     
     //MARK: - Constructor
     init() {
-        targetProductRulesList = ["CP", "cp", "bkp", "BKP","ตราห้าาดาว" ,"ห้าดาว", "ท้าดาว", "ไส้กรอก", "ไสกรอก", "ไส้กรอ", "ไสกรอ", "ไส่กรอก", "ไสกรอ", "คูโร", "คุโร", "คโร", "บุตะ", "บูตะ", "บตะ", "โบตะ", "โรโบตะ", "โบดะ", "โรโบดะ" , "น้ำตาว", "kurobuta", "kurobuda", "Kurobuta", "KUROBUTA"];
+        targetProductRulesList = ["CP", "cp", "bkp", "BKP","ตราห้าาดาว" ,"ห้าดาว", "ท้าดาว", "ไส้กรอก", "ไสกรอก", "ไส้กรอ", "ไสกรอ", "ไส่กรอก", "ไสกรอ", "คูโร", "คุโร", "คโร", "บุตะ", "บูตะ", "บตะ", "โบตะ", "โรโบตะ", "โบดะ", "โรโบดะ" , "น้ำตาว", "kurobuta", "kurobuda", "Kurobuta", "KUROBUTA", "kuro", "Kuro", "KURO"];
     }
     
     //MARK: - Override Method
